@@ -34,7 +34,8 @@ function toggleTask(id) {
 }
 
 function deleteTask(id) {
-  tasks.filter((t) => t.id !== id);
+  const index = tasks.findIndex((t) => t.id === id);
+  tasks.splice(index, 1);
   render();
 }
 
