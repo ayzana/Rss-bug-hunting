@@ -47,6 +47,8 @@ body {
 }
 
 .plan {
+  display: flex;
+  flex-direction: column;
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 0;
@@ -106,4 +108,5 @@ body {
   color: #ffffff;
   text-decoration: none;
   font-weight: 600;
+  margin-top: auto;
 }
