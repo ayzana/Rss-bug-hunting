@@ -12,11 +12,15 @@ let nextId = 1;
 
 function addTask() {
   const text = input.value;
-  errorEl.hidden = true;
-  tasks.push({ id: nextId++, text: text, done: false });
-  console.log(tasks);
-  input.value = "";
-  render();
+  if (text) {
+    errorEl.hidden = true;
+    tasks.push({ id: nextId++, text: text, done: false });
+    input.value = "";
+    input.placeholder = "Новая задача...";
+    render();
+  } else {
+    input.placeholder = "Введите текст задачи";
+  }
 }
 
 function toggleTask(id) {
