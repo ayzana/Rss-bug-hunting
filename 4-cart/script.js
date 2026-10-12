@@ -103,7 +103,7 @@ function renderCart() {
       removeItem(item.id),
     );
     cartItemsEl.appendChild(li);
-    total += item.price * item.qty;
+    total = Number(total) + Number(lineTotal);
   });
 
   if (discount) {
