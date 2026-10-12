@@ -27,7 +27,7 @@ function getFiltered() {
   }
 
   if (category !== "all") {
-    result = products.filter((p) => p.category !== category);
+    result = products.filter((p) => p.category === category);
   }
 
   if (sort === "asc") {
@@ -57,3 +57,5 @@ sortSelect.addEventListener("change", render);
 resetBtn.addEventListener("click", () => {
   searchInput.value = "";
 });
+
+render();
