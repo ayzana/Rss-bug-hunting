@@ -31,9 +31,11 @@ function getFiltered() {
   }
 
   if (sort === "asc") {
-    result.sort((a, b) => b.price - a.price);
-  } else if (sort === "desc") {
     result.sort((a, b) => a.price - b.price);
+  } else if (sort === "desc") {
+    result.sort((a, b) => b.price - a.price);
+  } else {
+    result.sort((a, b) => a.id - b.id);
   }
 
   return result;
@@ -56,7 +58,10 @@ categorySelect.addEventListener("change", render);
 sortSelect.addEventListener("change", render);
 
 resetBtn.addEventListener("click", () => {
+  sortSelect.value = "default";
+  categorySelect.value = "all";
   searchInput.value = "";
+  render();
 });
 
 render();
