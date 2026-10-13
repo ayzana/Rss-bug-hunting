@@ -37,7 +37,7 @@ function getFiltered() {
   } else {
     result.sort((a, b) => a.id - b.id);
   }
-
+  countEl.textContent = result.length;
   return result;
 }
 
@@ -50,7 +50,6 @@ function render() {
     card.innerHTML = `<h3>${p.name}</h3><p class="cat">${p.category}</p><p class="price">$${p.price}</p>`;
     grid.appendChild(card);
   });
-  countEl.textContent = products.length;
 }
 
 searchInput.addEventListener("input", render);
