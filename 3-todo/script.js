@@ -11,11 +11,11 @@ let currentFilter = "all";
 let nextId = 1;
 
 function addTask() {
-  const text = input.value;
-  if (text) {
+  const text = input.value.trim();
+  input.value = "";
+  if (text.length > 0) {
     errorEl.hidden = true;
     tasks.push({ id: nextId++, text: text, done: false });
-    input.value = "";
     input.placeholder = "Новая задача...";
     render();
   } else {
