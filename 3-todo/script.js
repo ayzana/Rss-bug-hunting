@@ -11,45 +11,63 @@ let currentFilter = "all";
 let nextId = 1;
 
 function addTask() {
-  const text = input.value;
-  errorEl.hidden = true;
-  tasks.push({ id: nextId++, text: text, done: false });
+  const text = input.value.trim();
   input.value = "";
-  render();
+  if (text.length > 0) {
+    errorEl.hidden = true;
+    tasks.push({ id: nextId++, text: text, done: false });
+    input.placeholder = "Новая задача...";
+    render();
+  } else {
+    errorEl.hidden = false;
+  }
 }
 
 function toggleTask(id) {
   const task = tasks.find((t) => t.id === id);
-  task.done = true;
+  if (!task.done) {
+    task.done = true;
+  } else {
+    task.done = false;
+  }
   render();
 }
 
 function deleteTask(id) {
-  tasks.filter((t) => t.id !== id);
+  const index = tasks.findIndex((t) => t.id === id);
+  tasks.splice(index, 1);
   render();
 }
 
 function clearCompleted() {
-  tasks = [];
+  tasks = tasks.filter((t) => !t.done);
   render();
 }
 
 function getVisibleTasks() {
-  return tasks;
+  return tasks.filter((t) => {
+    if (currentFilter === "active") return !t.done;
+    if (currentFilter === "done") return t.done;
+    return true;
+  });
 }
 
 function updateCounter() {
-  counter.textContent = "Активных задач: " + tasks.length;
+  counter.textContent =
+    "Активных задач: " + tasks.filter((t) => t.done === false).length;
 }
 
 function render() {
+  list.replaceChildren();
   const visible = getVisibleTasks();
-  for (let i = 1; i <= visible.length; i++) {
+  for (let i = 0; i <= visible.length - 1; i++) {
     const task = visible[i];
     const li = document.createElement("li");
     li.className = "task";
     if (task.done) {
-      li.classList.add("completed");
+      li.classList.add("done");
+    } else {
+      li.classList.remove("done");
     }
 
     const span = document.createElement("span");
@@ -69,7 +87,7 @@ function render() {
   updateCounter();
 }
 
-addBtn.addEventListener("dblclick", addTask);
+addBtn.addEventListener("click", addTask);
 clearBtn.addEventListener("click", clearCompleted);
 
 filterButtons.forEach((btn) => {
