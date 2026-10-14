@@ -19,7 +19,7 @@ function addTask() {
     input.placeholder = "Новая задача...";
     render();
   } else {
-    input.placeholder = "Введите текст задачи";
+    errorEl.hidden = false;
   }
 }
 
