@@ -59,7 +59,7 @@ function increaseQty(id) {
 
 function decreaseQty(id) {
   const item = cart.find((i) => i.id === id);
-  if (item.qty > 0) item.qty--;
+  if (item.qty > 1) item.qty--;
   renderCart();
 }
 
